@@ -69,6 +69,36 @@ class EthContractService:
                c.implements_any_of('transfer(address,uint256)', 'transferFrom(address,address,uint256)') and \
                c.implements('approve(address,uint256)')
 
+    def is_uniswap_v2_pair_contract(self, function_sig_hashes):
+        c = ContractWrapper(function_sig_hashes)
+        return c.implements('totalSupply()') and \
+                c.implements('name()') and \
+                c.implements('symbol()') and \
+                c.implements('decimals()') and \
+                c.implements('totalSupply()') and \
+                c.implements('balanceOf(address)') and \
+                c.implements('allowance(address,address)') and \
+                c.implements('approve(address,uint256)') and \
+                c.implements('transfer(address,uint256)') and \
+                c.implements('transferFrom(address,address,uint256)') and \
+                c.implements('DOMAIN_SEPARATOR()') and \
+                c.implements('PERMIT_TYPEHASH()') and \
+                c.implements('nonces(address)') and \
+                c.implements('permit(address,address,uint256,uint256,uint8,bytes32,bytes32)') and \
+                c.implements('MINIMUM_LIQUIDITY()') and \
+                c.implements('factory()') and \
+                c.implements('token0()') and \
+                c.implements('token1()') and \
+                c.implements('getReserves()') and \
+                c.implements('price0CumulativeLast()') and \
+                c.implements('price1CumulativeLast()') and \
+                c.implements('kLast()') and \
+                c.implements('mint(address)') and \
+                c.implements('burn(address)') and \
+                c.implements('skim(address)') and \
+                c.implements('swap(uint256,uint256,address,bytes)') and \
+                c.implements('sync()') and \
+                c.implements('initialize(address,address)')
 
 def clean_bytecode(bytecode):
     if bytecode is None or bytecode == '0x':
